@@ -6,13 +6,19 @@ For me the plugin stopped working (stopped installing). Fiddling around with dep
 
 Use at your own risk.
 
+### Install -
+
+```bash
+npm install github.com/Atchett/gatsby-plugin-gdpr-cookies
+```
+
 ## ...continues
 
 Gatsby plugin to add Google Analytics (V4 is supported), Google Tag Manager, Facebook Pixel, TikTok Pixel and Hotjar in a GDPR form to your site.
 
 **Version 2:** I did rewrite the whole plugin to remove all the ssr that was done before. This will ensure that no data is ever sent before the cookies are set to true and the plugin has been initialized. There are **no breaking changes**. The configuration is exactly the same and and `initializeAndTrack(location)` does still work as before. I also removed some dependencies to keep the bundle size as small as possible.
 
-*Feedback is much appreciated* 🖖🏽
+_Feedback is much appreciated_ 🖖🏽
 
 ## Install
 
@@ -30,35 +36,35 @@ module.exports = {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
         googleAnalytics: {
-          trackingId: 'YOUR_GOOGLE_ANALYTICS_TRACKING_ID', // leave empty if you want to disable the tracker
-          cookieName: 'gatsby-gdpr-google-analytics', // default
+          trackingId: "YOUR_GOOGLE_ANALYTICS_TRACKING_ID", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-google-analytics", // default
           anonymize: true, // default
-          allowAdFeatures: false // default
+          allowAdFeatures: false, // default
         },
         googleTagManager: {
-          trackingId: 'YOUR_GOOGLE_TAG_MANAGER_TRACKING_ID', // leave empty if you want to disable the tracker
-          cookieName: 'gatsby-gdpr-google-tagmanager', // default
-          dataLayerName: 'dataLayer', // default
+          trackingId: "YOUR_GOOGLE_TAG_MANAGER_TRACKING_ID", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-google-tagmanager", // default
+          dataLayerName: "dataLayer", // default
         },
         facebookPixel: {
-          pixelId: 'YOUR_FACEBOOK_PIXEL_ID', // leave empty if you want to disable the tracker
-          cookieName: 'gatsby-gdpr-facebook-pixel', // default
+          pixelId: "YOUR_FACEBOOK_PIXEL_ID", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-facebook-pixel", // default
         },
         tikTokPixel: {
-          pixelId: 'YOUR_TIKTOK_PIXEL_ID', // leave empty if you want to disable the tracker
-          cookieName: 'gatsby-gdpr-tiktok-pixel', // default
+          pixelId: "YOUR_TIKTOK_PIXEL_ID", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-tiktok-pixel", // default
         },
         hotjar: {
-          hjid: 'YOUR_HOTJAR_ID',
-          hjsv: 'YOUR_HOTJAR_SNIPPET_VERSION',
-          cookieName: 'gatsby-gdpr-hotjar', // default
+          hjid: "YOUR_HOTJAR_ID",
+          hjsv: "YOUR_HOTJAR_SNIPPET_VERSION",
+          cookieName: "gatsby-gdpr-hotjar", // default
         },
         linkedin: {
-          trackingId: 'YOUR_LINKEDIN_TRACKING_ID', // leave empty if you want to disable the tracker
-          cookieName: 'gatsby-gdpr-linked-in', // default
+          trackingId: "YOUR_LINKEDIN_TRACKING_ID", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-linked-in", // default
         },
         // defines the environments where the tracking should be available  - default is ["production"]
-        environments: ['production', 'development']
+        environments: ["production", "development"],
       },
     },
   ],
@@ -99,10 +105,11 @@ Some countries (such as Germany) require you to use the
 [\_anonymizeIP](https://support.google.com/analytics/answer/2763052) function for Google Analytics. Otherwise you are not allowed to use it. The option adds two blocks to the code:
 
 ```javascript
-ga('set', 'anonymizeIp', 1);
+ga("set", "anonymizeIp", 1)
 ```
 
 #### `opt-out`
+
 Your visitors should be able to opt-out for analytics tracking. By setting the Google Analytics cookie to false tracking will be stopped. Alternatively you can also set the corresponding window variable to false:
 
 ```javascript
@@ -141,7 +148,9 @@ Google Tag Manager environment preview name
 Data layer to be set before GTM is loaded. Should be an object or a function that is executed in the browser, e.g.:
 
 ```javascript
-  defaultDataLayer: { platform: "gatsby" }
+defaultDataLayer: {
+  platform: "gatsby"
+}
 ```
 
 ```javascript
@@ -221,13 +230,15 @@ Here you place your LinkedIn tracking ID.
 You can use a custom cookie name if you need to!
 
 ## Initialize and track
+
 This gatsby plugin now supports initializing and tracking right after a user accepts the cookie consent.
 
 ```javascript
 // in your cookie banner
 import { useLocation } from "@reach/router" // this helps tracking the location
-import { initializeAndTrack } from 'gatsby-plugin-gdpr-cookies'
+import { initializeAndTrack } from "gatsby-plugin-gdpr-cookies"
 ```
+
 Then you can execute `initializeAndTrack(location)` in your cookie banner callback. This will initialize the plugin with your options from the `gatsby-config.js` and then starts tracking the user based on the cookies/services are accepted.
 
 ```javascript
