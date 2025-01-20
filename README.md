@@ -9,7 +9,7 @@ Use at your own risk.
 ### Install -
 
 ```bash
-npm install github.com/Atchett/gatsby-plugin-gdpr-cookies
+npm install github:Atchett/gatsby-plugin-gdpr-cookies
 ```
 
 ## ...continues
